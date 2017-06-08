@@ -10,11 +10,11 @@ var config = {
     },
     ceo = {
         text: {
-            name: "Mark Hill",
+            name: "Mark Hilld",
             title: "Chief executive officer",
             contact: "Tel: 01 213 123 134",
         },
-        image: "../headshots/2.jpg"
+        stackChildren: true,
     },
 
     cto = {
@@ -24,8 +24,17 @@ var config = {
             title: "Chief Technology Officer",
         },
         stackChildren: true,
-        image: "../headshots/1.jpg"
     },
+
+    cxo = {
+        parent: ceo,
+        text:{
+            name: "Joe Linux",
+            title: "Chief Technology Officer",
+        },
+        stackChildren: true,
+    },
+
     cbo = {
         parent: ceo,
         stackChildren: true,
@@ -33,7 +42,6 @@ var config = {
             name: "Linda May",
             title: "Chief Business Officer",
         },
-        image: "../headshots/5.jpg"
     },
     cdo = {
         parent: ceo,
@@ -42,7 +50,6 @@ var config = {
             title: "Chief accounting officer",
             contact: "Tel: 01 213 123 134",
         },
-        image: "../headshots/6.jpg"
     },
     cio = {
         parent: cto,
@@ -50,7 +57,6 @@ var config = {
             name: "Ron Blomquist",
             title: "Chief Information Security Officer"
         },
-        image: "../headshots/8.jpg"
     },
     ciso = {
         parent: cto,
@@ -59,7 +65,6 @@ var config = {
             title: "Chief Innovation Officer",
             contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
         },
-        image: "../headshots/9.jpg"
     },
     cio2 = {
         parent: cdo,
@@ -70,7 +75,6 @@ var config = {
         link: {
             href: "http://www.google.com"
         },
-        image: "../headshots/10.jpg"
     },
     ciso2 = {
         parent: cbo,
@@ -78,7 +82,6 @@ var config = {
             name: "Alice Lopez",
             title: "Chief Communications Officer"
         },
-        image: "../headshots/7.jpg"
     },
     ciso3 = {
         parent: cbo,
@@ -86,7 +89,6 @@ var config = {
             name: "Mary Johnson",
             title: "Chief Brand Officer"
         },
-        image: "../headshots/4.jpg"
     },
     ciso4 = {
         parent: cbo,
@@ -94,12 +96,12 @@ var config = {
             name: "Kirk Douglas",
             title: "Chief Business Development Officer"
         },
-        image: "../headshots/11.jpg"
     }
 
     chart_config = [
         config,
         ceo,
+        cxo,
         cto,
         cbo,
         cdo,
