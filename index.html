@@ -56,14 +56,36 @@
     <div class="container" id="main-container">
 
     <div class="input-group" id="mobile-search-form">
-  <input type="text" class="form-control" placeholder="Search for..." id="mobile-search-bar">
+  <input type="text" class="form-control" placeholder="Search terms..." id="mobile-search-bar">
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button">Go!</button>
+    <button class="btn btn-default" type="button">Search</button>
   </span>
+  <span class="input-group-btn" style="padding-left:5px">
+    <a href="list.html"><button class="btn btn-primary" type="button">List All</button></a>
+  </span>  
+  <span class="input-group-btn">
+    <button class="btn btn-success" type="button">Graph</button>
+  </span>  
   </div>
+<!-- 
+<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+  <span class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary">1</button>
+    <button type="button" class="btn btn-secondary">2</button>
+    <button type="button" class="btn btn-secondary">3</button>
+    <button type="button" class="btn btn-secondary">4</button>
+  </span>
+  <span class="input-group">
+    <span class="input-group-addon" id="btnGroupAddon">@</span>
+    <span class="input-group-addon" id="btnGroupAddon">@</span>
+    <span class="input-group-addon" id="btnGroupAddon">@</span>
+    <input type="text" class="form-control" placeholder="Input group example" aria-describedby="btnGroupAddon">
+  </span>
+</div> -->
+
 
       <!-- Example row of columns -->
-      <div class="row">
+      <div class="row" id="main-row">
         <div class="col-md-8" id="video-container">
 
           <div class="videoWrapper">
@@ -74,7 +96,7 @@
 
         <div class="col-md-4" id="reqs-container">
           <h4 id="title">4. Spectral Clustering</h4>
-          <p>Spectral clustering uses K-Means clustering at the end. So, even this is sensitive to initial conditions and requires multiple restarts.﻿ &#9654; [13:08]</p>
+          <p><span id="video-description">Spectral clustering uses K-Means clustering at the end. So, even this is sensitive to initial conditions and requires multiple restarts.</span> &#9654; [<span id="video-duration">13:08</span>]</p>
           <p><strong>Prereqs</strong> (<span id="prereqsCount">0</span>)
           <ul id="prereqsList">
           </ul>
@@ -96,9 +118,38 @@
       </div>
     </footer> -->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase 
+      /*
+      Currently, Firebase is not used. But the reason we may one day use Firebase is if we start to exceed the limit of how many API calls we can make to Youtube for free (1 mil/day)..
+
+      As an alternative to Firebase, we could store the duration/description as cookies on the user's computer.
+      */
+      var config = {
+        apiKey: "AIzaSyAZoM4REBGBpMf5uCJpLQbCDZb8XsjOOYY", //TODO: secure this to referrer
+        authDomain: "worldofml-170207.firebaseapp.com",
+        databaseURL: "https://worldofml-170207.firebaseio.com",
+        projectId: "worldofml-170207",
+        storageBucket: "worldofml-170207.appspot.com",
+        messagingSenderId: "318749924514"
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database();
+
+      function writeContentData(id, title, description, duration) {
+        firebase.database().ref('content/' + id).set({
+          title: title,
+          description: description,
+          duration : duration
+        });
+      }
+
+    </script>
+
+
     <script src="assets/jquery-3.2.1.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="assets/bootstrap.min.js"></script>
