@@ -40,7 +40,8 @@ var qs = (function(a) {
 
 function setTitle(id, slug){
     var title = content[slug]['title'];
-    $('#title').html(id + '. ' + title);
+    $('#title').html(title);
+    //$('#title').html(id + '. ' + title);
 }
 
 function setVideo(slug){
@@ -153,6 +154,7 @@ function setPostreqs(slug){
     if (postreqsList.length==0)
         return //if no postreqs are listed
 
+    console.log(postreqsList)
     for (var i = 0; i < postreqsList.length; i++) {
         req = postreqsList[i]
         idx = order.indexOf(req)
@@ -163,6 +165,10 @@ function setPostreqs(slug){
     $('#postreqsCount').html(postreqsList.length)
 }
 
+function renderHomepage(){
+    $("#main-row").html('<div class="jumbotron"><div class="container"><h2 style="text-align:center">Learn Machine Learning...</h2><p></p>&nbsp;<p style="text-align:center">from well-explained videos</p><p style="text-align:center">with defined prerequisites</p><p style="text-align:center">curated by the crowd</p>      </div> </div><p style="text-align:center"><a class="btn btn-primary btn-lg" href="#" role="button">Intro Video &raquo;</a> &nbsp; <a class="btn btn-success btn-lg" href="#" role="button">Random &raquo;</a>  </p>');
+}
+
 
 var id = qs["id"]; //gets the GET parameter 'id' from the URL
 if (id==null){ //no ID provided
@@ -170,7 +176,7 @@ if (id==null){ //no ID provided
     // buttons: "start from beginning" and "random video"
     // Underneath, show screenshots of list view 
     // as well as graph view
-    $('body').html('No ID provided');
+    renderHomepage();
 } else if (order[id]==null) {
     $('body').html('Something went wrong... probably an invalid ID');
 } else {

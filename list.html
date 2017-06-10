@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">🌎 World of Machine Learning</a>
+          <a class="navbar-brand" href="index.html">🌎 World of Machine Learning</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         </div>
@@ -40,15 +40,29 @@
     </nav>
 
 
+    <div class="container" id="main-container">
 
+    <div class="input-group" id="mobile-search-form" style="padding-right:5px">
+  <input type="text" class="form-control" placeholder="Search terms..." id="mobile-search-bar" style="">
+<!--   <span class="input-group-btn">
+    <button class="btn btn-default" type="button">Search</button>
+  </span> -->
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" onclick="window.history.back();">Back</button>
+  </span>  
+  <span class="input-group-btn">
+    <button class="btn btn-success" type="button">Graph</button>
+  </span>  
+  </div>
 
-    <div class="container" id="list-container">
+    <div id="search-results-area">
+    <div class="container " id="list-container">
       <div class="row">
 <div class="list-group" id="content-list">
 
 </div>
     </div> <!-- /container -->
-
+    </div>
 
 
     <!-- Placed at the end of the document so the pages load faster -->
@@ -86,6 +100,7 @@
     <script src="assets/bootstrap.min.js"></script>
     <script src="data.js"></script>    
     <script src="assets/lister.js"></script>    
+    <script src="assets/searcher.js"></script>    
 
   </body>
 </html>
