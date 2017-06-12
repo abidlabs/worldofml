@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="favicon.ico"> -->
+
+    <title>World of Machine Learning</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/jumbotron.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+
+
+  </head>
+
+  <body>
+
+      <div class="container">
+    <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">🌎 World of Machine Learning</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+<!--           <form class="navbar-form navbar-right">
+
+                <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for..." id="search-bar">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+              </div>
+
+          </form>
+ -->        
+        </div>
+      </div>
+    </nav>
+
+
+
+
+    <div class="container" id="main-container">
+
+    <div class="input-group" id="mobile-search-form">
+  <input type="text" class="form-control" placeholder="Search terms..." id="mobile-search-bar">
+  
+  <!-- <span class="input-group-btn">
+    <button class="btn btn-default" type="button">Search</button>
+  </span> -->
+
+  <span class="input-group-btn left-most-btn">
+    <a href="list.html"><button class="btn btn-primary" type="button">List All</button></a>
+  </span>  
+  <span class="input-group-btn">
+    <button class="btn btn-success" type="button">Graph</button>
+  </span>  
+  </div>
+
+
+
+      <!-- Example row of columns -->
+      <div id="search-results-area">
+
+
+      <div class="row " id="main-row">
+        <div class="col-md-8" id="video-container">
+
+
+          <div class="videoWrapper">
+            <!-- Copy & Pasted from YouTube -->
+            <iframe id="videoEmbedIframe" width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        </div>
+
+        <div class="col-md-4" id="reqs-container">
+          <h4 id="title"><em>Video Title</em></h4>
+          <p><span id="video-description"><em>Video description loading...</em> </span> &#9654; [<span id="video-duration">?:??</span>]</p>
+          <p><strong>Prereqs</strong> (<span id="prereqsCount">0</span>)
+          <ul id="prereqsList">
+          </ul>
+          </p>
+          <p><strong>Going Forward..</strong> (<span id="postreqsCount">0</span>)</p>
+          <ul id="postreqsList">
+          </ul>
+          </p>
+          
+        </div>
+      </div>
+      </div>
+
+
+    </div> <!-- /container -->
+
+  <!--    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer> -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase 
+      /*
+      Currently, Firebase is not used. But the reason we may one day use Firebase is if we start to exceed the limit of how many API calls we can make to Youtube for free (1 mil/day)..
+
+      As an alternative to Firebase, we could store the duration/description as cookies on the user's computer.
+      */
+      var config = {
+        apiKey: "AIzaSyAZoM4REBGBpMf5uCJpLQbCDZb8XsjOOYY", //TODO: secure this to referrer
+        authDomain: "worldofml-170207.firebaseapp.com",
+        databaseURL: "https://worldofml-170207.firebaseio.com",
+        projectId: "worldofml-170207",
+        storageBucket: "worldofml-170207.appspot.com",
+        messagingSenderId: "318749924514"
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database();
+
+      function writeContentData(id, title, description, duration) {
+        firebase.database().ref('content/' + id).set({
+          title: title,
+          description: description,
+          duration : duration
+        });
+      }
+
+    </script>
+
+
+    <script src="assets/jquery-3.2.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="assets/bootstrap.min.js"></script>
+    <script src="assets/bootstrap3-typeahead.min.js"></script>
+    <script src="data.js"></script>    
+    <script src="assets/loader.js"></script>
+    <script src="assets/searcher.js"></script>    
+  </body>
+</html>

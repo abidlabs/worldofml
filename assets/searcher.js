@@ -26,31 +26,46 @@ Then put this inside it
 Then append everything that matches
 */
 
-function populateSearchResults(searchInput){
-    for (var i = 0; i < order.length; i++) {
-        item = order[i]
-        title = content[order[i]]['title']
-        isBasic = !(order[i] in prereqs)
-        terms = searchInput.split(" ")
-        isMatch = true;
-        for (var t=0; t<terms.length; t++) {
-            if (title.toLowerCase().indexOf(terms[t].toLowerCase())==-1){
-                isMatch = false
-            }            
+// function populateSearchResults(searchInput){
+//     for (var i = 0; i < order.length; i++) {
+//         item = order[i]
+//         title = content[order[i]]['title']
+//         isBasic = !(order[i] in prereqs)
+//         terms = searchInput.split(" ")
+//         isMatch = true;
+//         for (var t=0; t<terms.length; t++) {
+//             if (title.toLowerCase().indexOf(terms[t].toLowerCase())==-1){
+//                 isMatch = false
+//             }            
+//         }
+//         if (isMatch)
+//             $('#content-list').append('<a href="index.html?id='+i+'" class="list-group-item">'+title+'</a>')
+//     } 
+// } 
+
+// var previousSearchInput = ""
+
+// $("#mobile-search-bar").on("keyup paste change", function() {
+//    var currentSearchInput = $(this).val();
+//    if (currentSearchInput!=previousSearchInput){
+//        $('#search-results-area').html('<div class="list-group" style="padding-left:5px" id="content-list"></div><div style="text-align:center"><a href="javascript:location.reload();">Return to Original Page</a></div>')
+//        //console.log(currentSearchInput);
+//        populateSearchResults(currentSearchInput);
+//        previousSearchInput = currentSearchInput; 
+//    } 
+// });
+
+var titles = [];
+for (var i=0; i<order.length; i++) {
+    titles.push(content[order[i]]['title'])
+}
+
+$("#mobile-search-bar").typeahead({
+    source:titles,  
+    afterSelect: function (item) {
+        var idx = titles.indexOf(item)
+        if (idx>-1) {
+            window.location.href = "video.html?id="+idx;
         }
-        if (isMatch)
-            $('#content-list').append('<a href="index.html?id='+i+'" class="list-group-item">'+title+'</a>')
-    } 
-} 
-
-var previousSearchInput = ""
-
-$("#mobile-search-bar").on("keyup paste change", function() {
-   var currentSearchInput = $(this).val();
-   if (currentSearchInput!=previousSearchInput){
-       $('#search-results-area').html('<div class="list-group" style="padding-left:5px" id="content-list"></div><div style="text-align:center"><a href="javascript:location.reload();">Return to Original Page</a></div>')
-       //console.log(currentSearchInput);
-       populateSearchResults(currentSearchInput);
-       previousSearchInput = currentSearchInput; 
-   } 
+    }
 });
