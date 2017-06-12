@@ -38,22 +38,22 @@
 
 
     <div class="row " id="main-row" style="">
-      <div class="col-md-12" style="border:1px solid gray; margin:30px; border-radius: 5px; padding-bottom: 10px; text-align:center">
+      <div  style="border:1px solid gray; margin:30px; border-radius: 5px; padding: 0px 10px 10px 10px; text-align:center">
         <h3 style="">Search </h3>
 
-        <input type="text" class="form-control" placeholder="for a machine learning concept (e.g. 'k-means clustering' or 'affinity propagation' or 'stochastic gradient descent'" id="mobile-search-bar" style="width:100% !important" autocomplete="off"><br>
+        <input type="text" class="form-control" placeholder="for a machine learning concept (e.g. 'k-means clustering' or 'affinity propagation' or 'stochastic gradient descent')" id="mobile-search-bar" autocomplete="off"><br>
         ...and we'll try to find you a well-explained video, with defined prerequisites, curated by the crowd
 
 
       </div>
       <div class="col-sm-5" style="border:1px solid gray; margin: 0px 30px 10px 30px; border-radius: 5px; padding-bottom: 10px; text-align:center">
-        <h3 style="">Browse </h3> the entire list of machine-learning content that we have. You can either view the entire list or visualize prerequisites as a graph: <p> &nbsp; </p><p>
+        <h3 style="">Browse </h3> the entire list of <span id="total-count" style="font-weight: bold"></span> machine-learning videos that we have. You can either view the entire list or visualize prerequisites as a graph: <p> &nbsp; </p><p>
 
         <button class="btn btn-primary" type="button" onclick="window.location.href='list.html'">List All</button>
         <button class="btn btn-success" type="button">Graph</button></p>
       </div>
       <div class="col-sm-5 pull-right" style="border:1px solid gray; margin: 0px 30px 10px 30px; border-radius: 5px; padding-bottom: 10px; text-align:center">
-        <h3 style="">Contribute</h3> videos that you have found helpful, and add to the prerequisite graph. All it takes is a <tt>git commit</tt> and you can update this website directly. <p> &nbsp; </p><p>
+        <h3 style="">Contribute</h3> videos that you believe are helpful, and add to the prerequisite graph. All it takes is a <tt>git commit</tt> and you can update this website directly. <p> &nbsp; </p><p>
 
         <button class="btn btn-primary" type="button">How It Works</button>
         <button class="btn btn-success" type="button" onclick="window.location.href='https://github.com/abidlabs/worldofml/'">Github</button></p> 
@@ -102,5 +102,8 @@
     <script src="assets/bootstrap3-typeahead.min.js"></script>
     <script src="data.js"></script>    
     <script src="assets/searcher.js"></script>    
+    <script>
+    $('#total-count').html(order.length)
+    </script>
   </body>
   </html>
