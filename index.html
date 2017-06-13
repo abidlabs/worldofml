@@ -28,17 +28,17 @@
 
 
 
-  <div class="container" id="main-container">
+  <div class="container" id="main-container" style="padding-left:10px">
 
     <div style="text-align:center">
-      <img src="banner2.png" style="width:100%; padding-bottom:30px; padding-top: 20px;">
+      <img src="assets/banner2.png" style="width:100%; padding-bottom:10px; padding-top: 20px; max-width: 500px">
     </div>
 
 
 
 
     <div class="row " id="main-row" style="">
-      <div  style="border:1px solid gray; margin:30px; border-radius: 5px; padding: 0px 10px 10px 10px; text-align:center">
+      <div  style="border:1px solid gray; margin:30px; border-radius: 5px; padding: 0px 20px 10px 20px; text-align:center">
         <h3 style="">Search </h3>
 
         <input type="text" class="form-control" placeholder="for a machine learning concept (e.g. 'k-means clustering' or 'affinity propagation' or 'stochastic gradient descent')" id="mobile-search-bar" autocomplete="off"><br>
@@ -55,7 +55,7 @@
       <div class="col-sm-5 pull-right" style="border:1px solid gray; margin: 0px 30px 10px 30px; border-radius: 5px; padding-bottom: 10px; text-align:center">
         <h3 style="">Contribute</h3> videos that you believe are helpful, and add to the prerequisite graph. All it takes is a <tt>git commit</tt> and you can update this website directly. <p> &nbsp; </p><p>
 
-        <button class="btn btn-primary" type="button">How It Works</button>
+        <button class="btn btn-primary" type="button" onclick="window.location.href='howitworks.html'">How It Works</button>
         <button class="btn btn-success" type="button" onclick="window.location.href='https://github.com/abidlabs/worldofml/'">Github</button></p> 
 
       </div>
@@ -103,7 +103,8 @@
     <script src="data.js"></script>    
     <script src="assets/searcher.js"></script>    
     <script>
-    $('#total-count').html(order.length)
+    $('#total-count').html(order.length);
+    $('#mobile-search-bar').focus();
     </script>
   </body>
   </html>

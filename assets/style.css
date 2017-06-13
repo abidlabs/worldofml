@@ -59,6 +59,15 @@ body{
   background-color: #f5f5f5;
 }
 
+.badge{
+	padding: 5px 11px !important;
+	font-size: 15px !important;
+	border-radius: 4px !important;
+}
+
+.badge-visited{
+	background-color: #5cb85c;
+}
 
 .container {
   width: auto;
@@ -80,6 +89,9 @@ body{
 	padding-bottom: 5px;
 }
 
+.how-it-works-row{
+	padding:0px 40px 0px 40px;
+}
 
 .left-most-btn{
 	/*padding-left: 5px;*/

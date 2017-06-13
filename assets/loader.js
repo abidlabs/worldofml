@@ -71,6 +71,12 @@ function parseDuration(iso8601Duration) {
 };
 
 function setDuration(slug){
+    if (slug in localDurations){//if it's cached locally
+        var duration = localDurations[slug]
+        $('#video-duration').html(duration)
+        return
+    }//otherwise, get it from the Youtube API
+
     var url = content[slug]['video_url'];
     var urlID = url.split("watch?v=")[1];
     var urlAPI =  "https://www.googleapis.com/youtube/v3/videos?"
@@ -81,7 +87,11 @@ function setDuration(slug){
             var readable_duration = parseDuration(duration)
             var minutes = readable_duration['minutes']
             var seconds = readable_duration['seconds']
-            $('#video-duration').html(minutes + ':' + seconds)
+            if (seconds<10) {seconds = '0'+seconds} //adding leading zero for padding
+            var legibleDuration = minutes + ':' + seconds
+            $('#video-duration').html(legibleDuration)
+            localDurations[slug] = legibleDuration;
+            window.localStorage.durations = JSON.stringify(localDurations);
         })
         .fail(function( jqxhr, textStatus, error ) {
             var err = textStatus + ", " + error;
@@ -95,6 +105,11 @@ function setDescription(slug){
         $('#video-description').html(description)
         return
     }
+    if (slug in localDescriptions){//if it's cached locally
+        var description = localDescriptions[slug]
+        $('#video-description').html(description)
+        return
+    }
     var url = content[slug]['video_url'];
     var urlID = url.split("watch?v=")[1];
     var urlAPI =  "https://www.googleapis.com/youtube/v3/videos?"
@@ -102,6 +117,8 @@ function setDescription(slug){
         .done(function( json ) {
             var description = json['items'][0]['snippet']['description'];
             $('#video-description').html(description)
+            localDescriptions[slug] = description;
+            window.localStorage.descriptions = JSON.stringify(localDescriptions);
         })
         .fail(function( jqxhr, textStatus, error ) {
             var err = textStatus + ", " + error;
@@ -110,6 +127,13 @@ function setDescription(slug){
 }
 
 function setSpanDuration(span_id, video_id){
+    var slug = order[video_id];
+    if (slug in localDurations){//if it's cached locally
+        var duration = localDurations[slug]
+        $('#'+span_id).html(duration)
+        return
+    }//otherwise, get it from the Youtube API
+
     var url = content[order[video_id]]['video_url'];
     var urlID = url.split("watch?v=")[1];
     var urlAPI =  "https://www.googleapis.com/youtube/v3/videos?"
@@ -120,7 +144,11 @@ function setSpanDuration(span_id, video_id){
             var readable_duration = parseDuration(duration)
             var minutes = readable_duration['minutes']
             var seconds = readable_duration['seconds']
-            $('#'+span_id).html(minutes + ':' + seconds)
+            if (seconds<10) {seconds = '0'+seconds} //adding leading zero for padding
+            var legibleDuration = minutes + ':' + seconds
+            $('#'+span_id).html(legibleDuration)
+            localDurations[slug] = legibleDuration;
+            window.localStorage.durations = JSON.stringify(localDurations);            
         })
         .fail(function( jqxhr, textStatus, error ) {
             var err = textStatus + ", " + error;
@@ -136,7 +164,7 @@ function setPrereqs(slug){
         req = prereqsList[i]
         idx = order.indexOf(req)
         title = content[order[idx]]['title']
-        $('#prereqsList').append('<li><a href="?id='+idx+'">'+title+'</a> [<span id="prereq-'+i+'">4:23</span>]</li>')
+        $('#prereqsList').append('<li><a href="?id='+idx+'">'+title+'</a> [<span id="prereq-'+i+'">?:??</span>]</li>')
         setSpanDuration('prereq-'+i, idx);        
     } 
     $('#prereqsCount').html(prereqsList.length)
@@ -154,7 +182,6 @@ function setPostreqs(slug){
     if (postreqsList.length==0)
         return //if no postreqs are listed
 
-    console.log(postreqsList)
     for (var i = 0; i < postreqsList.length; i++) {
         req = postreqsList[i]
         idx = order.indexOf(req)
@@ -165,12 +192,19 @@ function setPostreqs(slug){
     $('#postreqsCount').html(postreqsList.length)
 }
 
-function renderHomepage(){
-    $("#main-row").html('<div class="jumbotron"><div class="container"><h2 style="text-align:center">Learn Machine Learning...</h2><p></p>&nbsp;<p style="text-align:center">from well-explained videos</p><p style="text-align:center">with defined prerequisites</p><p style="text-align:center">curated by the crowd</p>      </div> </div><p style="text-align:center"><a class="btn btn-primary btn-lg" href="#" role="button">Intro Video &raquo;</a> &nbsp; <a class="btn btn-success btn-lg" href="#" role="button">Random &raquo;</a>  </p>');
+function setVisited(slug){
+    localVisitedVideos[slug] = true;
+    window.localStorage.visitedVideos = JSON.stringify(localVisitedVideos);
 }
 
-
 var id = qs["id"]; //gets the GET parameter 'id' from the URL
+// fetch cached values from 
+var localDurations; var localDescriptions; var localVisitedVideos;
+if (window.localStorage.durations == null) {localDurations = {}} else {localDurations = JSON.parse(window.localStorage.durations);}
+if (window.localStorage.descriptions == null) {localDescriptions = {}} else {localDescriptions = JSON.parse(window.localStorage.descriptions);}
+if (window.localStorage.visitedVideos == null) {localVisitedVideos = {}} else {localVisitedVideos = JSON.parse(window.localStorage.visitedVideos);}
+
+
 if (id==null){ //no ID provided
     //In the future, show a home page with a jumbotron and two 
     // buttons: "start from beginning" and "random video"
@@ -187,4 +221,5 @@ if (id==null){ //no ID provided
     setPostreqs(slug);
     setDuration(slug);
     setDescription(slug);
+    setVisited(slug)
 }

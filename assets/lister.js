@@ -1,15 +1,62 @@
-function populateList(){
-    for (var i = 0; i < order.length; i++) {
-        item = order[i]
-        title = content[order[i]]['title']
-        isBasic = !(order[i] in prereqs)
-        if (isBasic){
-            $('#content-list').append('<a href="video.html?id='+i+'" class="list-group-item"><span class="badge badge-success">'+1+'</span>'+title+'</a>')
-        } else {
-            $('#content-list').append('<a href="video.html?id='+i+'" class="list-group-item"><span class="badge">'+2+'</span>'+title+'</a>')
+function setRank(item){
+    if (item in ranks) {return ranks[item]} //if it's already in the dictionary, return. Otherwise..
+    if (!(item in prereqs)) {
+        ranks[item] = 0; return 0; //if it doesn't have prereqs, it's a root node
+    } else {
+        prereqRanks = []
+        for (var j = 0; j < prereqs[item].length; j++){
+            var r = setRank(prereqs[item][j])
+            prereqRanks.push(r)
         }
-        
+        r = Math.max(...prereqRanks)+1 //the triple dots are for 'spread' operator
+        ranks[item] = r; return r;
+    }
+}
+
+function calculateRanksRecursively(){
+    for (var i = 0; i < order.length; i++) {
+        setRank(order[i]);
+        if (Object.keys(ranks).length==order.length) //if all of the elements have a rank, we're done
+            break
     } 
 }
 
+//this function ensures that the videos are sorted in order of depth
+function sortByDepth(a, b){
+    return ranks[a] - ranks[b]
+}
+
+function populateList(){
+    var deepOrder = order.slice().sort(sortByDepth) //ensuring that the videos are sorted in order of depth
+    for (var i = 0; i < deepOrder.length; i++) {
+        var item = deepOrder[i]
+        var title = content[deepOrder[i]]['title']
+        var idx = order.indexOf(item);
+        $('#content-list').append('<a href="video.html?id='+idx+'" class="list-group-item"><span class="badge badge-toggle" data-item="'+item+'" id="badge-'+idx+'">'+ranks[item]+'</span>'+title+'</a>')
+        if (item in localVisitedVideos)
+            $("#badge-"+idx).addClass('badge-visited')
+    } 
+}
+
+function bindBadges(){
+    $('.badge-toggle').click(function(){
+        if ($(this).hasClass('badge-visited')){
+            $(this).removeClass('badge-visited')
+            delete localVisitedVideos[$(this).attr('data-item')]
+            window.localStorage.visitedVideos = JSON.stringify(localVisitedVideos);
+        } else {
+            $(this).addClass('badge-visited') 
+            localVisitedVideos[$(this).attr('data-item')] = true;
+            window.localStorage.visitedVideos = JSON.stringify(localVisitedVideos);
+        }
+        return false;
+    })
+}
+
+var localVisitedVideos;
+if (window.localStorage.visitedVideos == null) {localVisitedVideos = {}} else {localVisitedVideos = JSON.parse(window.localStorage.visitedVideos);}
+var ranks = {};
+calculateRanksRecursively();
 populateList();
+bindBadges();
+

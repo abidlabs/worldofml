@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- <link rel="icon" href="favicon.ico"> -->
+
+  <title>World of Machine Learning</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="assets/jumbotron.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="assets/style.css">
+
+
+</head>
+
+<body>
+
+
+
+
+
+  <div class="col-md-12" >
+
+      <nav class="navbar navbar-light navbar-fixed-top navbar-inverse">
+          <a class="navbar-brand" href="index.html">🌎 World of Machine Learning</a>
+    </nav>
+
+
+  <div class="row" style="text-align:center; margin-top: 50px">
+  <h2>How It Works</h2>
+  </div>
+  <div class="row how-it-works-row">
+  <h3><strong>1. How Do I Use This Site?</strong></h3>
+  We've put together a collection of the best videos available on YouTube to help you understand a variety of machine learning (ML) topics. Simply search for the concept you're interested understanding better and you'll be shown the video with a short description.
+  </div>
+  <div class="row how-it-works-row">
+  <h3><strong>2. Do I Need to Know the Basics of ML?</strong></h3>
+  Each video includes a prerequisite graph that lists exactly what topics you need to know first in order to understand the video. Don't know one of the prerequisites? Simply click on it to go to that video directly. Postrequisites are also provided to help you figure out where to go next!
+  </div>
+  <div class="row how-it-works-row">
+  <h3><strong>3. Where Do I Even Start?</strong></h3>
+  A good place to start may be to click on <button class="btn btn-primary btn-sm" onclick="window.location.href='list.html'">List</button> to see all of our videos. Using a breadth-first search, we list the topics in order from basic concepts to more advanced topics. Every time you watch a video, we store that information (on your computer -- it's all private!) so you can keep track of which concepts you've covered. Alternatively, check out our total <button class="btn btn-success btn-sm" onclick="window.location.href='graph.html'">Graph</button> to see which concepts are important. 
+  </div>
+  <div class="row how-it-works-row">
+  <h3><strong>4. How Can I Help?</strong></h3>
+  This entire website is a few static pages hosted on Github. Our collection of videos and our prerequisite graph is a single javascript file (<tt>data.js</tt>) that can be edited by anyone with a Github account in a transparent manner. Simply fork the <a href="">Github repository</a>, add a video (make sure to include a title and video URL -- and if you'd like, a description of the video) or a prerequisite, and submit a pull request. Your changes will go live soon! 
+  </div>
+  </div>
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase 
+      /*
+      Currently, Firebase is not used. But the reason we may one day use Firebase is if we start to exceed the limit of how many API calls we can make to Youtube for free (1 mil/day)..
+
+      As an alternative to Firebase, we could store the duration/description as cookies on the user's computer.
+      */
+      var config = {
+        apiKey: "AIzaSyAZoM4REBGBpMf5uCJpLQbCDZb8XsjOOYY", //TODO: secure this to referrer
+        authDomain: "worldofml-170207.firebaseapp.com",
+        databaseURL: "https://worldofml-170207.firebaseio.com",
+        projectId: "worldofml-170207",
+        storageBucket: "worldofml-170207.appspot.com",
+        messagingSenderId: "318749924514"
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database();
+
+      function writeContentData(id, title, description, duration) {
+        firebase.database().ref('content/' + id).set({
+          title: title,
+          description: description,
+          duration : duration
+        });
+      }
+
+    </script>
+
+
+    <script src="assets/jquery-3.2.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="assets/bootstrap.min.js"></script>
+    <script src="assets/bootstrap3-typeahead.min.js"></script>
+    <script src="assets/ganalytics.js"></script>    
+  </body>
+  </html>

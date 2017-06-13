@@ -4,6 +4,11 @@ The variable 'content' stores primary information about all topics, including ke
 
 var content = 
 {
+	"intro_ml":{
+		"title":"Introduction to Machine Learning",
+		"video_url":"youtube.com",
+		"description":"This video serves as an introduction both to machine learning as well as how to use this site",
+	},
 	"kl_divergence": {
 		"title":"K-L Divergence (Relative Entropy)",
 		"video_url":"https://www.youtube.com/watch?v=iYYX0M4sp1g",
@@ -21,7 +26,8 @@ var content =
 	},
 	"spectral_clustering":{
 		"title":"Spectral Clustering",
-		"video_url":"https://www.youtube.com/watch?v=P-LEH-AFovE"
+		"video_url":"https://www.youtube.com/watch?v=P-LEH-AFovE",
+		"description":'In multivariate statistics and the clustering of data, spectral clustering techniques make use of the spectrum (eigenvalues) of the similarity matrix of the data to perform dimensionality reduction before clustering in fewer dimensions. The similarity matrix is provided as an input and consists of a quantitative assessment of the relative similarity of each pair of points in the dataset. In application to image segmentation, spectral clustering is known as segmentation-based object categorization.'
 	},
 	"monte_carlo_method":{
 		"title":"Monte Carlo Method",
@@ -45,6 +51,7 @@ var content =
 
 //This is actually the reverse order, making it easier to add new elements (they can be just added to the beginning)
 var order = [
+	"intro_ml",
 	"importance_sampling",
 	"markov_chain",
 	"mcmc",
@@ -68,18 +75,33 @@ The variable 'prereqs' stores relational information that describes which videos
 
 var prereqs = 
 {
+	"k_means":[
+		"intro_ml"
+	],
+	"information_entropy":[
+		"intro_ml"
+	],
+	"monte_carlo_method":[
+		"intro_ml"
+	],
+	"markov_chain":[
+		"intro_ml"
+	],
 	"kl_divergence":[
 		"information_entropy",
+		"intro_ml",
 	],
 	"spectral_clustering":[
 		"k_means",
+		"intro_ml",
 	],
 	"mcmc":[
 		"monte_carlo_method",
-		"markov_chain"
+		"markov_chain",
 	],
 	"importance_sampling":[
-		"monte_carlo_method"
+		"monte_carlo_method",
+		"intro_ml",
 	]
 }
 
@@ -89,8 +111,8 @@ var prereqs =
 3. No videos longer than 20 minutes or shorter than 2 minutes 
 4. No duplicate slugs in any of the arrays
 5. All of the javascript runs without syntax errors
-6. Nothing should have more than 5 immediate prereqs or postreqs
-
+6. Nothing should have more than 5 immediate prereqs or postreqs (maybe except "intro_ml")
+7. Evertything needs to have at least one prereq (except "intro_ml")
 In theory, we could do a check on the front end for these if git integration tests are hard to set up
 
 */

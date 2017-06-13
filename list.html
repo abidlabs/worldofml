@@ -24,7 +24,7 @@
   <body>
 
       <div class="container">
-    <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-light navbar-fixed-top navbar-inverse">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -50,13 +50,13 @@
   <span class="input-group-btn">
     <button class="btn btn-primary" type="button" onclick="window.history.back();">Back</button>
   </span>  
-  <span class="input-group-btn">
+<!--   <span class="input-group-btn">
     <button class="btn btn-success" type="button">Graph</button>
   </span>  
-  </div>
+ -->  </div>
 
     <div id="search-results-area">
-    <div class="container " id="list-container">
+    <div class="container " id="list-container" style="padding-left:30px">
       <div class="row">
 <div class="list-group" id="content-list">
 
@@ -73,24 +73,24 @@
       /*
       Currently, Firebase is not used. But the reason we may one day use Firebase is if we start to exceed the limit of how many API calls we can make to Youtube for free
       */
-      var config = {
-        apiKey: "AIzaSyAZoM4REBGBpMf5uCJpLQbCDZb8XsjOOYY",
-        authDomain: "worldofml-170207.firebaseapp.com",
-        databaseURL: "https://worldofml-170207.firebaseio.com",
-        projectId: "worldofml-170207",
-        storageBucket: "worldofml-170207.appspot.com",
-        messagingSenderId: "318749924514"
-      };
-      firebase.initializeApp(config);
-      var database = firebase.database();
+      // var config = {
+      //   apiKey: "AIzaSyAZoM4REBGBpMf5uCJpLQbCDZb8XsjOOYY",
+      //   authDomain: "worldofml-170207.firebaseapp.com",
+      //   databaseURL: "https://worldofml-170207.firebaseio.com",
+      //   projectId: "worldofml-170207",
+      //   storageBucket: "worldofml-170207.appspot.com",
+      //   messagingSenderId: "318749924514"
+      // };
+      // firebase.initializeApp(config);
+      // var database = firebase.database();
 
-      function writeContentData(id, title, description, duration) {
-        firebase.database().ref('content/' + id).set({
-          title: title,
-          description: description,
-          duration : duration
-        });
-      }
+      // function writeContentData(id, title, description, duration) {
+      //   firebase.database().ref('content/' + id).set({
+      //     title: title,
+      //     description: description,
+      //     duration : duration
+      //   });
+      // }
 
     </script>
 
@@ -102,6 +102,7 @@
     <script src="data.js"></script>    
     <script src="assets/lister.js"></script>    
     <script src="assets/searcher.js"></script>    
+    <script src="assets/ganalytics.js"></script>    
 
   </body>
 </html>
