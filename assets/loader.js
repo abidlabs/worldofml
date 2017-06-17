@@ -38,7 +38,8 @@ var qs = (function(a) {
     return b;
 })(window.location.search.substr(1).split('&'));
 
-function setTitle(id, slug){
+function setTitle(slug){
+// function setTitle(id, slug){
     var title = content[slug]['title'];
     $('#title').html(title);
     //$('#title').html(id + '. ' + title);
@@ -126,15 +127,16 @@ function setDescription(slug){
         });    
 }
 
-function setSpanDuration(span_id, video_id){
-    var slug = order[video_id];
+// function setSpanDuration(span_id, video_id){
+function setSpanDuration(span_id, video_slug){
+    var slug = video_slug;
     if (slug in localDurations){//if it's cached locally
         var duration = localDurations[slug]
         $('#'+span_id).html(duration)
         return
     }//otherwise, get it from the Youtube API
 
-    var url = content[order[video_id]]['video_url'];
+    var url = content[slug]['video_url'];
     var urlID = url.split("watch?v=")[1];
     var urlAPI =  "https://www.googleapis.com/youtube/v3/videos?"
     
@@ -162,10 +164,10 @@ function setPrereqs(slug){
         return //if no prereqs are listed
     for (var i = 0; i < prereqsList.length; i++) {
         req = prereqsList[i]
-        idx = order.indexOf(req)
-        title = content[order[idx]]['title']
-        $('#prereqsList').append('<li><a href="?id='+idx+'">'+title+'</a> [<span id="prereq-'+i+'">?:??</span>]</li>')
-        setSpanDuration('prereq-'+i, idx);        
+        //idx = order.indexOf(req)
+        title = content[req]['title']
+        $('#prereqsList').append('<li><a href="?id='+req+'">'+title+'</a> [<span id="prereq-'+i+'">?:??</span>]</li>')
+        setSpanDuration('prereq-'+i, req);        
     } 
     $('#prereqsCount').html(prereqsList.length)
 }
@@ -184,10 +186,10 @@ function setPostreqs(slug){
 
     for (var i = 0; i < postreqsList.length; i++) {
         req = postreqsList[i]
-        idx = order.indexOf(req)
-        title = content[order[idx]]['title']
-        $('#postreqsList').append('<li><a href="?id='+idx+'">'+title+'</a> [<span id="postreq-'+i+'">4:23</span>]</li>')
-        setSpanDuration('postreq-'+i, idx);
+        //idx = order.indexOf(req)
+        title = content[req]['title']
+        $('#postreqsList').append('<li><a href="?id='+req+'">'+title+'</a> [<span id="postreq-'+i+'">4:23</span>]</li>')
+        setSpanDuration('postreq-'+i, req);
     } 
     $('#postreqsCount').html(postreqsList.length)
 }
@@ -197,7 +199,7 @@ function setVisited(slug){
     window.localStorage.visitedVideos = JSON.stringify(localVisitedVideos);
 }
 
-var id = qs["id"]; //gets the GET parameter 'id' from the URL
+var slug = qs["id"]; //gets the GET parameter 'id' from the URL
 // fetch cached values from 
 var localDurations; var localDescriptions; var localVisitedVideos;
 if (window.localStorage.durations == null) {localDurations = {}} else {localDurations = JSON.parse(window.localStorage.durations);}
@@ -205,17 +207,18 @@ if (window.localStorage.descriptions == null) {localDescriptions = {}} else {loc
 if (window.localStorage.visitedVideos == null) {localVisitedVideos = {}} else {localVisitedVideos = JSON.parse(window.localStorage.visitedVideos);}
 
 
-if (id==null){ //no ID provided
+if (slug==null){ //no ID provided
     //In the future, show a home page with a jumbotron and two 
     // buttons: "start from beginning" and "random video"
     // Underneath, show screenshots of list view 
     // as well as graph view
     renderHomepage();
-} else if (order[id]==null) {
+} else if (content[slug]==null) {
     $('body').html('Something went wrong... probably an invalid ID');
 } else {
-    slug = order[id];
-    setTitle(id, slug);
+    //slug = order[id];
+    // setTitle(id, slug);
+    setTitle(slug);
     setVideo(slug);
     setPrereqs(slug);
     setPostreqs(slug);

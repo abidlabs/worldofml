@@ -101,10 +101,12 @@
     <script src="assets/bootstrap.min.js"></script>
     <script src="assets/bootstrap3-typeahead.min.js"></script>
     <script src="data.js"></script>    
+    <script src="prereqs.js"></script>    
     <script src="assets/searcher.js"></script>    
     <script src="assets/ganalytics.js"></script>    
     <script>
-    $('#total-count').html(order.length);
+    var keys = Object.keys(content);
+    $('#total-count').html(keys.length);
     $('#mobile-search-bar').focus();
     </script>
   </body>

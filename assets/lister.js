@@ -14,9 +14,10 @@ function setRank(item){
 }
 
 function calculateRanksRecursively(){
-    for (var i = 0; i < order.length; i++) {
-        setRank(order[i]);
-        if (Object.keys(ranks).length==order.length) //if all of the elements have a rank, we're done
+    var keys = Object.keys(content);
+    for (var i = 0; i < keys.length; i++) {
+        setRank(keys[i]);
+        if (Object.keys(ranks).length==keys.length) //if all of the elements have a rank, we're done
             break
     } 
 }
@@ -27,14 +28,15 @@ function sortByDepth(a, b){
 }
 
 function populateList(){
-    var deepOrder = order.slice().sort(sortByDepth) //ensuring that the videos are sorted in order of depth
+    var keys = Object.keys(content);
+    var deepOrder = keys.slice().sort(sortByDepth) //ensuring that the videos are sorted in order of depth
     for (var i = 0; i < deepOrder.length; i++) {
         var item = deepOrder[i]
         var title = content[deepOrder[i]]['title']
-        var idx = order.indexOf(item);
-        $('#content-list').append('<a href="video.html?id='+idx+'" class="list-group-item"><span class="badge badge-toggle" data-item="'+item+'" id="badge-'+idx+'">'+ranks[item]+'</span>'+title+'</a>')
+        //var idx = order.indexOf(item);
+        $('#content-list').append('<a href="video.html?id='+item+'" class="list-group-item"><span class="badge badge-toggle" data-item="'+item+'" id="badge-'+item+'">'+ranks[item]+'</span>'+title+'</a>')
         if (item in localVisitedVideos)
-            $("#badge-"+idx).addClass('badge-visited')
+            $("#badge-"+item).addClass('badge-visited')
     } 
 }
 
