@@ -65,37 +65,6 @@
 
 
     <!-- Placed at the end of the document so the pages load faster -->
-
-    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-    <script>
-      // Initialize Firebase 
-      /*
-      Currently, Firebase is not used. But the reason we may one day use Firebase is if we start to exceed the limit of how many API calls we can make to Youtube for free (1 mil/day)..
-
-      As an alternative to Firebase, we could store the duration/description as cookies on the user's computer.
-      */
-      var config = {
-        apiKey: "AIzaSyAZoM4REBGBpMf5uCJpLQbCDZb8XsjOOYY", //TODO: secure this to referrer
-        authDomain: "worldofml-170207.firebaseapp.com",
-        databaseURL: "https://worldofml-170207.firebaseio.com",
-        projectId: "worldofml-170207",
-        storageBucket: "worldofml-170207.appspot.com",
-        messagingSenderId: "318749924514"
-      };
-      firebase.initializeApp(config);
-      var database = firebase.database();
-
-      function writeContentData(id, title, description, duration) {
-        firebase.database().ref('content/' + id).set({
-          title: title,
-          description: description,
-          duration : duration
-        });
-      }
-
-    </script>
-
-
     <script src="assets/jquery-3.2.1.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="assets/bootstrap.min.js"></script>

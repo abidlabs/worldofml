@@ -5,6 +5,12 @@ The variable 'prereqs' stores relational information that describes which videos
 
 var prereqs = 
 {
+	"gaussian_mixture_model":[
+		//Covariance Matrix
+		//PSD matrix
+		//Hidden variable model
+		//convex combination
+	],
 	"k_means":[
 		"intro_ml"
 	],

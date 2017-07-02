@@ -4,6 +4,43 @@ The variable 'content' stores primary information about all topics, including ke
 
 var content = 
 {
+	"exponential_families_definition":{
+		"title":"Exponential Families",
+		"video_url":"https://www.youtube.com/watch?v=_aNk4QKi2_o"
+	},
+	"EM":{
+		"title":"Expectation-Maximization Algorithm",
+		"video_url":"https://www.youtube.com/watch?v=AnbiNaVp3eQ"
+	},
+	"dirichlet_distribution":{
+		"title":"Dirichlet Distribution",
+		"video_url":"https://www.youtube.com/watch?v=nfBNOWv1pgE"
+	},
+	"Empirical Bayes":{
+		"title":
+		"video_url":
+	},
+	"classification_tree":{
+		"title":"Classification Tree",
+		"video_url":"https://www.youtube.com/watch?v=p17C9q2M00Q"
+	},
+	""
+	"vc_dimension":{
+		"title":"VC Dimension",
+		"video_url":"https://www.youtube.com/watch?v=puDzy2XmR5c",
+	},
+	"empirical_risk_minimization":{
+		"title":"Empirical Risk Minimization",
+		"video_url":"https://www.youtube.com/watch?v=5adNQvSlF50"
+	},
+	"causal_inference":{
+		"title":"Causal Inference",
+		"video_url":"https://www.youtube.com/watch?v=tO99T1GQ6SY",
+	},
+	"gaussian_mixture_model"{
+		"title":"Gaussian Mixture Model (GMM)",
+		"video_url":"https://www.youtube.com/watch?v=Rkl30Fr2S38"
+	},
 	"bias_variance_tradeoff":{
 		"title":"Bias-Variance Tradeoff",
 		"video_url":"https://www.youtube.com/watch?v=C3nIFH649wY"
