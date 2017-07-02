@@ -16,15 +16,10 @@ var content =
 		"title":"Dirichlet Distribution",
 		"video_url":"https://www.youtube.com/watch?v=nfBNOWv1pgE"
 	},
-	"Empirical Bayes":{
-		"title":
-		"video_url":
-	},
 	"classification_tree":{
 		"title":"Classification Tree",
 		"video_url":"https://www.youtube.com/watch?v=p17C9q2M00Q"
 	},
-	""
 	"vc_dimension":{
 		"title":"VC Dimension",
 		"video_url":"https://www.youtube.com/watch?v=puDzy2XmR5c",
@@ -35,9 +30,9 @@ var content =
 	},
 	"causal_inference":{
 		"title":"Causal Inference",
-		"video_url":"https://www.youtube.com/watch?v=tO99T1GQ6SY",
+		"video_url":"https://www.youtube.com/watch?v=tO99T1GQ6SY"
 	},
-	"gaussian_mixture_model"{
+	"gaussian_mixture_model":{
 		"title":"Gaussian Mixture Model (GMM)",
 		"video_url":"https://www.youtube.com/watch?v=Rkl30Fr2S38"
 	},
