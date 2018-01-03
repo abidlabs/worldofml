@@ -1,28 +1,3 @@
-// var content = 
-// {
-// 	"kl_divergence":{"video_url":"https://www.youtube.com/watch?v=iYYX0M4sp1g"},
-// 	"information_entropy":{"video_url":"https://www.youtube.com/watch?v=LodZWzrbayY"},
-// 	"k_means":{"video_url":"https://www.youtube.com/watch?v=_aWzGGNrcic"},
-// 	"spectral_clustering":{
-// 		"title":"Spectral Clustering",
-// 		"video_url":"https://www.youtube.com/watch?v=P-LEH-AFovE"}
-// 	"agglomerative_clustering":{"video_url":"https://www.youtube.com/watch?v=XJ3194AmH40"}
-// }
-
-
-// var prereqs = 
-// {
-// 	"kl_divergence":[
-// 		"information_entropy",
-// 	],
-// 	"spectral_clustering":[
-// 		"k_means",
-// 	],
-// 	"agglomerative_clustering":[
-// 		"k_means",
-// 	]
-// }
-
 //a function to retrieve GET parameters from the URL
 var qs = (function(a) {
     if (a == "") return {};
@@ -116,7 +91,8 @@ function setDescription(slug){
     var urlAPI =  "https://www.googleapis.com/youtube/v3/videos?"
     $.getJSON( urlAPI, {'id':urlID, 'key':config.apiKey, 'part':'snippet'} )
         .done(function( json ) {
-            var description = json['items'][0]['snippet']['description'];
+            var description = json['items'][0]['snippet']['description']; var length = 500;
+            description = description.length > length ? description.substring(0, length - 3) + "..." : description.substring(0, length);
             $('#video-description').html(description)
             localDescriptions[slug] = description;
             window.localStorage.descriptions = JSON.stringify(localDescriptions);

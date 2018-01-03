@@ -5,11 +5,21 @@ The variable 'prereqs' stores relational information that describes which videos
 
 var prereqs = 
 {
+	"naive_bayes":[
+		"bayes_theorem",
+	],
+	"bayesian_network":[
+		"bayes_theorem",
+	],
+	"bayesian_inference":[
+		"bayes_theorem",
+	],
+	"conjugate_prior":[
+		"bayesian_inference",
+		"exponential_families_definition",
+	],
 	"gaussian_mixture_model":[
-		//Covariance Matrix
-		//PSD matrix
-		//Hidden variable model
-		//convex combination
+		"PSD_matrix"
 	],
 	"k_means":[
 		"intro_ml"

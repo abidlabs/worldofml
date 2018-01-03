@@ -4,6 +4,55 @@ The variable 'content' stores primary information about all topics, including ke
 
 var content = 
 {
+	"rbm":{
+		"title":"Restricted Boltzmann Machine (RBM)",
+		"video_url":"https://www.youtube.com/watch?v=puux7KZQfsE"
+	},
+	"vanishing_gradients":{
+		"title":"Vanishing Gradients",
+		"video_url":"https://www.youtube.com/watch?v=SKMpmAOUa2Q"
+	},
+	"svm":{
+		"title":"Support Vector Machines (SVM)",
+		"video_url":"https://www.youtube.com/watch?v=eUfvyUEGMD8",
+	},
+	"kernel_svm":{
+		"title":"Kernel SVM",
+		"video_url":"https://www.youtube.com/watch?v=9IfT8KXX_9c",
+	},
+	"naive_bayes":{
+		"title":"Naive Bayes Model",
+		"video_url":"https://www.youtube.com/watch?v=z5UQyCESW64"
+	},
+	"PSD_matrix":{
+		"title":"Positive Semidefinite Matrix",
+		"video_url":"https://www.youtube.com/watch?v=ojUQk_GNQbQ",
+		"description":"Definition and properties of positive semidefinite matrices, including 5 different ways to tell if a matrix is PSD."
+	},
+	"bayes_network":{
+		"title":"Bayes Network",
+		"video_url":"https://www.youtube.com/watch?v=I3PHJZGot48&t=40s",
+	},
+	"conjugate_prior":{
+		"title":"Conjugate Priors",
+		"video_url":"https://www.youtube.com/watch?v=zXNB2vzKKIQ"
+	},
+	"proportionality":{
+		"title":"Proportionality (Bayesian)",
+		"video_url":"https://www.youtube.com/watch?v=VBOt7EoPL9M&t=1s"
+	},
+	"bayes_theorem":{
+		"title":"Bayes' Rule",
+		"video_url":"https://www.youtube.com/watch?v=BrK7X_XlGB8",
+	},
+	"bayesian_inference":{
+		"title":"Bayesian Inference",
+		"video_url":"https://www.youtube.com/watch?v=0LQmZXCWMFI"
+	},
+	"convex_functions":{
+		"title":"Convex Functions",
+		"video_url":"https://www.youtube.com/watch?v=6WDgPZAzdQs"
+	},
 	"exponential_families_definition":{
 		"title":"Exponential Families",
 		"video_url":"https://www.youtube.com/watch?v=_aNk4QKi2_o"
