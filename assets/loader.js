@@ -134,6 +134,47 @@ function setSpanDuration(span_id, video_slug){
         });    
 }
 
+function setGraph(slug){
+    graph = {}
+    //Handle prereqs
+    var prereqsList = prereqs[slug]
+    if (prereqsList!=null)
+    {        
+        for (var i = 0; i < prereqsList.length; i++) {
+            req = prereqsList[i]
+            graph[req] = {id: req, description: content[req]['title'], fill_color: "#CCDDFF", dependencies: []}
+        } 
+    }
+    //Handle current node
+    graph[slug] = {id: slug, description: content[slug]['title'], fill_color: "#CCDDFF", dependencies:prereqsList}
+
+    //Handle postreqs
+    var postreqsList = [];
+    for (var key in prereqs) {
+        // first check is just to make sure they are valid keys, and the second checks to see if that key has 'slug' as one of the prepreqs
+        if (prereqs.hasOwnProperty(key) && prereqs[key].indexOf(slug)>-1) {
+            postreqsList.push(key);
+        }
+    }
+
+    if (postreqsList!=null)
+    {        
+        for (var i = 0; i < postreqsList.length; i++) {
+            req = postreqsList[i]
+            graph[req] = {id: req, description: content[req]['title'], fill_color: "#CCDDFF", dependencies:[slug]}
+        } 
+    }
+
+    console.log(graph)
+
+
+    function callback(id) {
+      window.location.href = "?id="+id;
+    }
+
+    drawGraph($("#graph"), graph, callback)     
+}
+
 function setPrereqs(slug){
     var prereqsList = prereqs[slug]
     if (prereqsList==null)
@@ -201,4 +242,5 @@ if (slug==null){ //no ID provided
     setDuration(slug);
     setDescription(slug);
     setVisited(slug)
+    setGraph(slug)
 }

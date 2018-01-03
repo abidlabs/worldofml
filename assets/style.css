@@ -1,3 +1,23 @@
+#graph {
+	cursor: move;
+}
+.box-g {
+	cursor: pointer;	
+}
+.box-g text, .box-g tspan {
+	font-family: "opensans";
+	font-size: 17px;
+	font-weight: bold;
+	text-anchor: middle;
+	alignment-baseline: middle;	
+    pointer-events: none;
+}
+.box-circle {
+	stroke-width: 4;
+	fill: white;
+}
+
+
 .videoWrapper {
 	position: relative;
 	padding-bottom: 56.25%; /* 16:9 */
