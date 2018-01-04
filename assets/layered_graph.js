@@ -72,6 +72,19 @@ function drawBox(g, node, opts) {
     	.attr('cx', loc.x - width / 2)
     	.attr('cy', loc.y)
     	.attr('r', height / 4 - 2)
+   if (node.checked) {
+        var lineData = [ { "x": -8,   "y": -1},  { "x": -3,  "y": 4},
+                         { "x": 7,  "y": -6}];
+        var lineFunction = d3.line()
+                             .x(function(d) { return d.x + loc.x - width / 2; })
+                             .y(function(d) { return d.y + loc.y; })
+
+        box_g.append("path")
+            .attr("d", lineFunction(lineData))
+            .attr("stroke", "#445599")
+            .attr("stroke-width", 4)
+            .attr("fill", "none");
+   }
     var textbox = box_g.append('text')
     	.attr('x', loc.x + height / 8 - 2)
     	.attr('y', loc.y)

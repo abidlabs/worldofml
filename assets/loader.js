@@ -136,14 +136,17 @@ function setSpanDuration(span_id, video_slug){
 
 function setGraph(slug){
     graph = {}
+
     //Handle prereqs
     var prereqsList = prereqs[slug]
     if (prereqsList!=null)
     {        
         for (var i = 0; i < prereqsList.length; i++) {
             req = prereqsList[i]
-            graph[req] = {id: req, description: content[req]['title'], fill_color: "#CCDDFF", dependencies: []}
+            graph[req] = {id: req, description: content[req]['title'], fill_color: "#EEEEFF", dependencies: []}
         } 
+    } else {
+        prereqsList = [];
     }
     //Handle current node
     graph[slug] = {id: slug, description: content[slug]['title'], fill_color: "#CCDDFF", dependencies:prereqsList}
@@ -161,7 +164,7 @@ function setGraph(slug){
     {        
         for (var i = 0; i < postreqsList.length; i++) {
             req = postreqsList[i]
-            graph[req] = {id: req, description: content[req]['title'], fill_color: "#CCDDFF", dependencies:[slug]}
+            graph[req] = {id: req, description: content[req]['title'], fill_color: "#EEEEFF", dependencies:[slug]}
         } 
     }
 

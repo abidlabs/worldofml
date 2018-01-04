@@ -17,8 +17,28 @@
 
   <!-- Custom styles for this template -->
   <!-- <link href="assets/jumbotron.css" rel="stylesheet"> -->
+  <link rel="stylesheet" type="text/css" href="assets/open_sans.css" />    
   <link rel="stylesheet" href="assets/style.css">
 
+
+<style>
+input{
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    height: 40px;
+    width: 600px;
+    border:1px solid #eaeaea;
+    outline:none;
+}
+input:hover{
+    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+}
+input:focus{
+    border-color:#4d90fe;
+}
+
+</style>
 
 </head>
 
@@ -38,26 +58,33 @@
 
 
     <div class="row " id="main-row" style="">
-      <div  style="border:1px solid gray; margin:30px; border-radius: 5px; padding: 0px 20px 10px 20px; text-align:center">
-        <h3 style="">Search </h3>
+      <div  style="border:0px solid gray; margin:30px; border-radius: 5px; padding: 0px 20px 10px 20px; text-align:center">
+        <!-- <h3 style="">Search </h3> -->
 
-        <input type="text" class="form-control" placeholder="for a machine learning concept (e.g. 'k-means clustering' or 'affinity propagation' or 'stochastic gradient descent')" id="mobile-search-bar" autocomplete="off"><br>
+        <input type="text"  placeholder="Search for a machine learning concept, like: Spectral Clustering" id="mobile-search-bar" autocomplete="off"><br>
         ...and we'll try to find you a well-explained video, with defined prerequisites, curated by the crowd
 
+        <br>
 
-      </div>
-      <div class="col-sm-5" style="border:1px solid gray; margin: 0px 30px 10px 30px; border-radius: 5px; padding-bottom: 10px; text-align:center">
+      <svg id="graph" width="500px" height="200px" style="border: solid 0px black; margin: 20px 0px"></svg> 
+
+      <div class="row" style="padding:10px 0px">
+      <div  style="border:1px solid gray; border-radius: 5px; padding: 10px; text-align:center; width:500px; margin: 0 auto;">
         <h3 style="">Browse </h3> the entire list of <span id="total-count" style="font-weight: bold"></span> machine-learning videos that we have. You can either view the entire list or visualize prerequisites as a graph: <p> &nbsp; </p><p>
 
         <button class="btn btn-primary" type="button" onclick="window.location.href='list.html'">List All</button>
         <button class="btn btn-success" type="button">Graph</button></p>
       </div>
-      <div class="col-sm-5 pull-right" style="border:1px solid gray; margin: 0px 30px 10px 30px; border-radius: 5px; padding-bottom: 10px; text-align:center">
-        <h3 style="">Contribute</h3> videos that you believe are helpful, and add to the prerequisite graph. All it takes is a <tt>git commit</tt> and you can update this website directly. <p> &nbsp; </p><p>
+      </div>
+
+      <div class="row" style="padding:10px 0px">
+      <div style="border:1px solid gray; margin: 0 auto; border-radius: 5px; padding: 10px; text-align:center; width:500px">
+        <h3 style="">Contribute</h3> videos that you believe are helpful, and add to the prerequisite graph. All it takes is a pull request and you can update this website directly. <p> &nbsp; </p><p>
 
         <button class="btn btn-primary" type="button" onclick="window.location.href='howitworks.html'">How It Works</button>
         <button class="btn btn-success" type="button" onclick="window.location.href='https://github.com/abidlabs/worldofml/'">Github</button></p> 
 
+      </div>
       </div>
     </div>
   </div>
@@ -69,14 +96,61 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="assets/bootstrap.min.js"></script>
     <script src="assets/bootstrap3-typeahead.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ariutta.github.io/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
+    <script src='assets/layered_graph.js'></script>
+
     <script src="data.js"></script>    
     <script src="prereqs.js"></script>    
     <script src="assets/searcher.js"></script>    
     <script src="assets/ganalytics.js"></script>    
+
     <script>
     var keys = Object.keys(content);
     $('#total-count').html(keys.length);
     $('#mobile-search-bar').focus();
+
+    var randomProperty = function (obj) {
+      var keys = Object.keys(obj)
+      return keys[ keys.length * Math.random() << 0];
+    };
+
+    function setGraph(slug){
+      graph = {}
+
+      //Handle prereqs
+      var prereqsList = prereqs[slug]
+      if (prereqsList!=null)
+      {        
+          for (var i = 0; i < prereqsList.length; i++) {
+              req = prereqsList[i]
+              graph[req] = {id: req, description: content[req]['title'], fill_color: "#EEEEFF", dependencies: []}
+          } 
+      }
+      //Handle current node
+      graph[slug] = {id: slug, description: content[slug]['title'], fill_color: "#CCDDFF", dependencies:prereqsList}
+
+      function callback(id) {
+        window.location.href = "video.html?id="+id;
+      }
+
+      drawGraph($("#graph"), graph, callback)     
+    }
+
+    function randomizeHomepage(){
+      var slug = randomProperty(content)
+      var title = content[slug]['title']
+      $('#mobile-search-bar').attr("placeholder","Search for a machine learning concept, like: "+title)
+      console.log(title)
+      $("#graph").empty();   
+      setGraph(slug)
+    }
+
+    randomizeHomepage()
+    // window.setInterval(function(){
+    //   randomizeHomepage()
+    // }, 3000);  
+
     </script>
   </body>
   </html>
